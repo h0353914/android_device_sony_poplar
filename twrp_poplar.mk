@@ -15,10 +15,19 @@
 #
 
 # Inherit AOSP configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+
+# Inherit from our custom product configuration
+$(call inherit-product, vendor/twrp/config/common.mk)
+
+# Qcom standard decryption
+PRODUCT_PACKAGES += \
+	qcom_decrypt \
+	qcom_decrypt_fbe
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := omni_poplar
+PRODUCT_NAME := twrp_poplar
 PRODUCT_DEVICE := poplar
 PRODUCT_BRAND := Sony
 PRODUCT_MODEL := G8341
@@ -33,7 +42,3 @@ BUILD_FINGERPRINT := Sony/G8341/G8341:9/47.2.A.11.228/3311891731:user/release-ke
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.usb.pid_suffix=1F3 \
     vendor.usb.rndis.func.name=gsi
-
-ifneq ($(OMNI_DEV_CERTIFICATE),)
-    PRODUCT_DEFAULT_DEV_CERTIFICATE := $(OMNI_DEV_CERTIFICATE)
-endif
