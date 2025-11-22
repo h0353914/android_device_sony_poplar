@@ -5,6 +5,7 @@ on early-init
 
 on init
     setprop prepdecrypt.loglevel 2
+    setprop prepdecrypt.setpatch false
 
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
