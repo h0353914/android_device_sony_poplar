@@ -26,7 +26,7 @@ TARGET_BOOTLOADER_BOARD_NAME := G8341
 
 ### KERNEL
 BOARD_KERNEL_CMDLINE += androidboot.hardware=poplar
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
+TARGET_KERNEL_CONFIG := lineage-msm8998-yoshino-poplar_defconfig
 
 ### PARTITIONS
 # See also /proc/partitions on the device
