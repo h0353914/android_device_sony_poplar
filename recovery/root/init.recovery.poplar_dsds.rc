@@ -1,0 +1,16 @@
+import /init.recovery.qcom_decrypt.rc
+
+on early-init
+    mkdir /firmware 0771 system system
+
+on init
+    setprop prepdecrypt.loglevel 2
+    setprop prepdecrypt.setpatch false
+
+on fs
+    wait /dev/block/platform/soc/1da4000.ufshc
+    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
+
+on post-fs
+    # start clearpad_post_probe when filesystem is available for fwflash
+    write /sys/devices/virtual/input/clearpad/post_probe_start 1

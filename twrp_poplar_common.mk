@@ -14,8 +14,18 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
+# Inherit AOSP configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
-ifneq ($(filter poplar poplar_dsds poplar_kddi,$(TARGET_DEVICE)),)
-include $(call all-subdir-makefiles,$(LOCAL_PATH))
-endif
+# Inherit from our custom product configuration
+$(call inherit-product, vendor/twrp/config/common.mk)
+
+# Qcom standard decryption
+PRODUCT_PACKAGES += \
+	qcom_decrypt \
+	qcom_decrypt_fbe
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.usb.pid_suffix=1F3 \
+    vendor.usb.rndis.func.name=gsi

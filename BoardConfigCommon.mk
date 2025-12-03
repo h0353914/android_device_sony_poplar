@@ -21,11 +21,7 @@ DEVICE_PATH := device/sony/poplar
 
 PRODUCT_PLATFORM := msm8998
 
-### BOOTLOADER
-TARGET_BOOTLOADER_BOARD_NAME := G8341
-
 ### KERNEL
-BOARD_KERNEL_CMDLINE += androidboot.hardware=poplar
 TARGET_KERNEL_CONFIG := lineage-msm8998-yoshino-poplar_defconfig
 
 ### PARTITIONS
@@ -40,4 +36,6 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 1610612736
 
 ### TWRP
 # FSTAB
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/sony/poplar/recovery.fstab
+
+TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
