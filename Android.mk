@@ -16,6 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter poplar poplar_dsds poplar_kddi,$(TARGET_DEVICE)),)
+ifneq ($(filter poplar poplar_dsds poplar_kddi poplardcm,$(TARGET_DEVICE)),)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
