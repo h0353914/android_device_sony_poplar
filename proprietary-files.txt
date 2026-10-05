@@ -84,8 +84,8 @@ vendor/camera/SOI13BS1/scene_detector.dat
 
 # Display configuration
 vendor/etc/ad_calib.cfg
-vendor/etc/qdcm_calib_data_6.xml
-vendor/etc/qdcm_calib_data_9.xml
+vendor/etc/qdcm_calib_data_6.xml|f8b3869a71e421eb2bbfc138195b670310d2b9a9|097fdc8478627b1c97c1798654d9d18aa1807585
+vendor/etc/qdcm_calib_data_9.xml|0cda3a0d8f5b5c3def0511df8749173140fc4ea6|483df0b981864ed00246f2252f4ddbcaff2edd30
 
 # Fingerprint
 vendor/bin/hw/fpc_fingerprint@2.1_HIDL-service
