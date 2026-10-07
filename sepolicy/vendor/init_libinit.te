@@ -1,0 +1,4 @@
+# libinit_poplar 在 init 內讀 LTALabel 取得機型，用來設定 ro.product.model
+# 開機早期 by-name 連結還沒建立，所以暫時在 /dev 建 8:2 的區塊節點來讀
+allow init ltalabel_block_device:blk_file r_file_perms;
+allow init tmpfs:blk_file { create unlink r_file_perms };

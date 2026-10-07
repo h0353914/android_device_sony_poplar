@@ -26,5 +26,13 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/init/fstab.qcom
 
+# SEPolicy
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+
+# Init
+SOONG_CONFIG_NAMESPACES += libinit
+SOONG_CONFIG_libinit := vendor_init_lib
+SOONG_CONFIG_libinit_vendor_init_lib := //$(DEVICE_PATH):libinit_poplar
+
 # Inherit vendor board configs
 include vendor/sony/poplar/BoardConfigVendor.mk
