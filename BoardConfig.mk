@@ -24,6 +24,11 @@ PRODUCT_PLATFORM := msm8998
 ### BOOTLOADER
 TARGET_BOOTLOADER_BOARD_NAME := G8341
 
+### ORANGEFOX
+# Plain make variables for the lunched device, the shared ones are in yoshino-common/vendorsetup.sh
+FOX_VARIANT := XZ1
+FOX_TARGET_DEVICES := poplar,poplar_canada,poplar_dsds,poplar_kddi,poplardcm,G8341,G8342,SO-01K,SOV36,701SO
+
 ### KERNEL
 BOARD_KERNEL_CMDLINE += androidboot.hardware=poplar
 TARGET_KERNEL_CONFIG := lineage-msm8998-yoshino-poplar_defconfig
