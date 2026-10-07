@@ -36,3 +36,9 @@ prebuilt_etc {
     filename_from_src: true,
     soc_specific: true,
 }
+
+sh_binary {
+    name: "init.felica_cfg.sh",
+    src: "init.felica_cfg.sh",
+    soc_specific: true,
+}
