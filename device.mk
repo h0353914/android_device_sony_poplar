@@ -41,6 +41,15 @@ PRODUCT_PACKAGES += \
     init.insmod.nfc_cxd.cfg \
     init.insmod.nfc_nxp.cfg
 
+# FeliCa
+PRODUCT_PACKAGES += \
+    felica_access.xml \
+    com.felicanetworks.felica.xml \
+    libnfc_hal_shim
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/nfc/com.felicanetworks.felica.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.felicanetworks.felica.jar
+
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
