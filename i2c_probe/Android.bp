@@ -1,0 +1,15 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// 探測某個 I2C 位址有沒有裝置回應，用來判斷是哪一種 NFC 控制器，見 init/init.nfc_insmod.sh。
+cc_binary {
+    name: "poplar_i2c_probe",
+    vendor: true,
+    srcs: ["i2c_probe.cpp"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}

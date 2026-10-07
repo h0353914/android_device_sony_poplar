@@ -9,3 +9,30 @@ prebuilt_etc {
     soc_specific: true,
     ramdisk_available: true,
 }
+
+prebuilt_etc {
+    name: "init.target.nfc.rc",
+    src: "init.target.nfc.rc",
+    sub_dir: "init",
+    vendor: true,
+}
+
+sh_binary {
+    name: "init.nfc_insmod.sh",
+    src: "init.nfc_insmod.sh",
+    soc_specific: true,
+}
+
+prebuilt_etc {
+    name: "init.insmod.nfc_cxd.cfg",
+    src: "init.insmod.nfc_cxd.cfg",
+    filename_from_src: true,
+    soc_specific: true,
+}
+
+prebuilt_etc {
+    name: "init.insmod.nfc_nxp.cfg",
+    src: "init.insmod.nfc_nxp.cfg",
+    filename_from_src: true,
+    soc_specific: true,
+}

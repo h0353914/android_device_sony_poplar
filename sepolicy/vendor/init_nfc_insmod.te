@@ -1,0 +1,33 @@
+# 依機型載入 NFC 控制器驅動模組（見 poplar init.nfc_insmod.sh）
+type init-nfc-insmod-sh, domain;
+type init-nfc-insmod-sh_exec, exec_type, vendor_file_type, file_type;
+
+vendor_internal_prop(vendor_nfc_prop)
+
+init_daemon_domain(init-nfc-insmod-sh)
+
+allow init-nfc-insmod-sh { vendor_shell_exec vendor_toolbox_exec }:file rx_file_perms;
+
+# 探測 I2C 位址有沒有裝置回應，判斷裝了哪一顆 NFC 控制器 (poplar_i2c_probe)
+type poplar_i2c_device, dev_type;
+type poplar_i2c_probe_exec, exec_type, vendor_file_type, file_type;
+allow init-nfc-insmod-sh poplar_i2c_probe_exec:file rx_file_perms;
+allow init-nfc-insmod-sh poplar_i2c_device:chr_file rw_file_perms;
+
+# 設定完成旗標
+set_prop(init-nfc-insmod-sh, vendor_nfc_prop)
+
+# vendor rc 的 on property: 觸發是以 vendor_init 讀取
+get_prop(vendor_init, vendor_nfc_prop)
+
+# 腳本直接呼叫 modprobe，權限比照 vendor_modprobe
+allow init-nfc-insmod-sh self:global_capability_class_set sys_module;
+allow init-nfc-insmod-sh vendor_file:system module_load;
+r_dir_file(init-nfc-insmod-sh, vendor_file)
+allow init-nfc-insmod-sh proc_modules:file r_file_perms;
+allow init-nfc-insmod-sh proc_cmdline:file r_file_perms;
+allow init-nfc-insmod-sh kmsg_device:chr_file w_file_perms;
+allow init-nfc-insmod-sh kernel:key search;
+
+# 等驅動建好的裝置節點
+allow init-nfc-insmod-sh nfc_device:chr_file getattr;

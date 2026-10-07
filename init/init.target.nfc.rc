@@ -1,0 +1,47 @@
+# NXP PN553 (global models) and Sony CXD224x (Japanese models) sit on the same
+# bus; both drivers are modules. init.nfc_insmod.sh finds out which chip is
+# fitted by probing the FeliCa LDO that only the Japanese models have, loads the
+# matching list (init.insmod.nfc_<chip>.cfg) and raises vendor.nfc.<chip>.ready
+# once the device nodes exist.
+on early-boot
+    start vendor.nfc_insmod
+
+service vendor.nfc_insmod /vendor/bin/init.nfc_insmod.sh
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:vendor.nfc.nxp.ready=1
+    start vendor.nfc_hal_service
+
+on property:vendor.nfc.cxd.ready=1
+    chown nfc nfc /dev/cxd224x-i2c
+    chown nfc nfc /dev/bd7602-i2c
+    start vendor.nfc_hal_service_cxd
+
+# Keep the NXP HAL from starting by itself, it is started above
+service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc@1.2-service
+    override
+    class hal
+    user nfc
+    group nfc
+    disabled
+
+# CXD NFC firmware download daemon
+service vendor.snfcboot /vendor/bin/snfcboot
+    class core
+    user nfc
+    group nfc
+    oneshot
+    disabled
+
+# Sony CXD NFC HAL
+service vendor.nfc_hal_service_cxd /vendor/bin/hw/android.hardware.nfc@1.2-service-cxd22xx
+    class hal
+    user nfc
+    group nfc
+    disabled
+
+on property:init.svc.vendor.nfc_hal_service_cxd=running
+    start vendor.snfcboot

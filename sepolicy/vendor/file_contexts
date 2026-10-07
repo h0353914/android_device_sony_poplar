@@ -1,0 +1,3 @@
+/(vendor|system/vendor)/bin/init\.nfc_insmod\.sh        u:object_r:init-nfc-insmod-sh_exec:s0
+/(vendor|system/vendor)/bin/poplar_i2c_probe        u:object_r:poplar_i2c_probe_exec:s0
+/dev/i2c-7                                                u:object_r:poplar_i2c_device:s0

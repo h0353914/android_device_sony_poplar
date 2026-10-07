@@ -18,7 +18,8 @@ PRODUCT_COPY_FILES += \
 
 # NFC
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.2-service
+    android.hardware.nfc@1.2-service \
+    poplar_i2c_probe
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
@@ -34,7 +35,11 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    fstab.qcom.ramdisk
+    fstab.qcom.ramdisk \
+    init.target.nfc.rc \
+    init.nfc_insmod.sh \
+    init.insmod.nfc_cxd.cfg \
+    init.insmod.nfc_nxp.cfg
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
